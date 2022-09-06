@@ -32,7 +32,7 @@ $(function(){
    $('#form_reg').on('submit',e=>{
        e.preventDefault()
        let data = {username:$('#form_reg [name=username]').val(),password:$('#form_reg [name=password]').val()}
-       $.post('http://www.liulongbin.top:3007/api/reguser',
+       $.post('/api/reguser',
        data,
        function(res){
         if(res.status !== 0) return layer.msg(res.message)
@@ -46,10 +46,11 @@ $(function(){
     e.preventDefault()
        $.ajax({
         method: "POST",
-        url: "http://www.liulongbin.top:3007/api/login",
+        url: "/api/login",
         data: $(this).serialize(),
         success: res=> {
-            if(res.status !==0 ) return layer.msg('登录失败！')
+            if(res.status !== 0 ) return layer.msg('登录失败！')
+     
             layer.msg('登录成功!')
             localStorage.setItem('token',res.token)
             location.href= '/index.html'
